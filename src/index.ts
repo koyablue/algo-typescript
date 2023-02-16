@@ -18,4 +18,4 @@ print(selectionSort(numbers(5)))
 
 print(insertionSort(numbers(5)))
 
-print(quickSort(numbers(5)))
+print(quickSort([2, 4, 3, 5,  9, 8, 7]))
