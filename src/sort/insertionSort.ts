@@ -6,9 +6,6 @@ export const insertionSort = (numbers: number[]): number[] => {
     let j = i - 1
     while (j >= 0 && numbers[j] > tmp) {
       numbers[j + 1] = numbers[j]
-
-      console.log('while: ', numbers)
-
       j -= 1
     }
     numbers[j + 1] = tmp
