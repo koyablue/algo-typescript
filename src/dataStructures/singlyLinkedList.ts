@@ -106,6 +106,33 @@ class SinglyLinkedList {
     this.head = _reverse(this.head, null)
   }
 
+  reverseEven() {
+    // ex) 1,4,6,8,9 -> 1,8,6,4,9
+    // ex) 1,2,3,4,5 -> 1,2,3,4,5
+    const _reverseEven = (head: ListNode | null, previousNode: ListNode | null) => {
+      if (!head) return null
+
+      let currentNode: ListNode | null = head
+      while (currentNode && currentNode.data % 2 === 0 ) {
+        const nextNode: ListNode | null = currentNode.next
+        currentNode.next = previousNode
+        previousNode = currentNode
+        currentNode = nextNode
+      }
+
+      if (currentNode !== head) {
+        head.next = currentNode
+        _reverseEven(currentNode, null)
+        return previousNode
+      } else {
+        head.next = _reverseEven(head.next, head)
+        return head
+      }
+    }
+
+    this.head = _reverseEven(this.head, null)
+  }
+
   /**
    * output data
    *
@@ -121,9 +148,16 @@ class SinglyLinkedList {
 }
 
 const l = new SinglyLinkedList()
-l.append(1)
 l.append(2)
-l.insert(0)
+l.append(4)
+l.append(6)
+l.append(1)
+l.append(3)
+l.append(5)
+l.append(2)
+l.append(4)
+l.append(6)
 l.print()
-l.reverseRecursive()
+console.log('#########')
+l.reverseEven()
 l.print()
