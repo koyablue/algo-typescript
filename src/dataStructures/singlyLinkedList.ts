@@ -1,4 +1,4 @@
-class ListNode {
+export class ListNode {
   data: any
   next: ListNode | null
 
@@ -8,7 +8,7 @@ class ListNode {
   }
 }
 
-class SinglyLinkedList {
+export class SinglyLinkedList {
   head: ListNode | null
 
   constructor(head?: ListNode | null) {
