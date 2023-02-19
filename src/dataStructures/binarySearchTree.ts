@@ -36,6 +36,37 @@ const search = (node: TreeNode | null, value: number): boolean => {
   return node.value > value ? search(node.left, value) : search(node.right, value)
 }
 
+const minValue = (node: TreeNode) => {
+  let currentNode = node
+  while (currentNode?.left) {
+    currentNode = currentNode.left
+  }
+
+  return currentNode
+}
+
+const remove = (node: TreeNode | null, value: number): TreeNode | null => {
+  if (node === null) return node
+
+  if (value < node.value) {
+    node.left = remove(node.left, value)
+  } else if (value > node.value) {
+    node.right = remove(node.right, value)
+  } else {
+    if (node.left === null) {
+      return node.right
+    } else if (node.right === null) {
+      return node.left
+    }
+
+    let tmp = minValue(node.right)
+    node.value = tmp.value
+    node.right = remove(node.right, tmp.value)
+  }
+
+  return node
+}
+
 let root = null
 root = insert(root, 3)
 root = insert(root, 6)
@@ -44,5 +75,8 @@ root = insert(root, 7)
 root = insert(root, 1)
 root = insert(root, 10)
 root = insert(root, 2)
-// inOrder(root)
-console.log(search(root, 10))
+inOrder(root)
+console.log('###############')
+root = remove(root, 6)
+inOrder(root)
+// console.log(search(root, 10))
