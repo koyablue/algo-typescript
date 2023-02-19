@@ -28,6 +28,14 @@ const inOrder = (node: TreeNode | null) => {
   inOrder(node.right)
 }
 
+const search = (node: TreeNode | null, value: number): boolean => {
+  if (node === null) return false
+
+  if (node.value === value) return true
+
+  return node.value > value ? search(node.left, value) : search(node.right, value)
+}
+
 let root = null
 root = insert(root, 3)
 root = insert(root, 6)
@@ -36,4 +44,5 @@ root = insert(root, 7)
 root = insert(root, 1)
 root = insert(root, 10)
 root = insert(root, 2)
-inOrder(root)
+// inOrder(root)
+console.log(search(root, 10))
