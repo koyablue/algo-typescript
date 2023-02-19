@@ -20,8 +20,20 @@ const insert = (node: TreeNode | null, value: number): TreeNode => {
   return node
 }
 
+const inOrder = (node: TreeNode | null) => {
+  if (node === null) return
+
+  inOrder(node.left)
+  console.log(node.value)
+  inOrder(node.right)
+}
+
 let root = null
 root = insert(root, 3)
 root = insert(root, 6)
 root = insert(root, 5)
-console.log(root)
+root = insert(root, 7)
+root = insert(root, 1)
+root = insert(root, 10)
+root = insert(root, 2)
+inOrder(root)
