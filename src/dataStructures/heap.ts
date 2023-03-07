@@ -25,10 +25,13 @@ export class MiniHeap {
     this.heap[index2] = prevIdx1Val
   }
 
-  minChild(index: number): number {
-    return this.heap[this.leftChildIndex(index)] < this.heap[this.rightChildIndex(index)]
-      ? this.leftChildIndex(index)
-      : this.rightChildIndex(index)
+  minChildIndex(index: number): number {
+    const leftChildIdx = this.leftChildIndex(index)
+    const rightChildIdx = this.rightChildIndex(index)
+
+    if (rightChildIdx > this.currentSize) return leftChildIdx
+
+    return this.heap[leftChildIdx] < this.heap[rightChildIdx] ? leftChildIdx : rightChildIdx
   }
 
   heapifyUp(index: number) {
@@ -42,7 +45,9 @@ export class MiniHeap {
   }
 
   heapifyDown(index: number) {
-    while (this.leftChildIndex(index) <= this.currentSize)
+    while (this.leftChildIndex(index) <= this.currentSize) {
+      const minChildIdx = this.minChildIndex(index)
+    }
   }
 
   push(value: number) {
@@ -51,6 +56,7 @@ export class MiniHeap {
     this.heapifyUp(this.currentSize)
   }
 
+  // get smallest element
   pop(): number | null {
     if (this.heap.length === 1) return null
 
@@ -58,6 +64,9 @@ export class MiniHeap {
     const data = this.heap.pop()
 
     if (this.heap.length === 1) return root
+
+    this.heap[1] = Number(data)
+    this.currentSize -= 1
 
     return root
   }
