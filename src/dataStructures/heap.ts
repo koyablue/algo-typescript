@@ -47,6 +47,10 @@ export class MiniHeap {
   heapifyDown(index: number) {
     while (this.leftChildIndex(index) <= this.currentSize) {
       const minChildIdx = this.minChildIndex(index)
+      if (this.heap[index] > this.heap[minChildIdx]) {
+        this.swap(index, minChildIdx)
+      }
+      index = minChildIdx
     }
   }
 
