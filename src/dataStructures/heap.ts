@@ -1,13 +1,19 @@
+// input: 5, 6, 2, 9, 13, 11, 1
+// List: [1, 6, 2, 9, 13, 11, 5]
+// (root, L, R, LL, LR, RL, RR)
+
 export class MiniHeap {
   heap: number[]
   currentSize: number
 
   constructor() {
-    this.heap = [-1 * Number.MAX_SAFE_INTEGER]
+    // this.heap = [-1 * Number.MAX_SAFE_INTEGER]
+    this.heap = []
     this.currentSize = 0
   }
 
   parentIndex(index: number): number {
+    if (index === 0) return -1
     return Math.floor(index / 2)
   }
 
@@ -35,7 +41,7 @@ export class MiniHeap {
   }
 
   heapifyUp(index: number) {
-    while (this.parentIndex(index) > 0) {
+    while (this.parentIndex(index) >= 0) {
       const parentIndex = this.parentIndex(index)
       if (this.heap[index] < this.heap[parentIndex]) {
         this.swap(index, parentIndex)
@@ -57,20 +63,21 @@ export class MiniHeap {
   push(value: number) {
     this.heap.push(value)
     this.currentSize += 1
-    this.heapifyUp(this.currentSize)
+    this.heapifyUp(this.currentSize - 1)
   }
 
   // get smallest element
   pop(): number | null {
-    if (this.heap.length === 1) return null
+    if (this.heap.length === 0) return null
 
-    const root = this.heap[1]
+    const root = this.heap[0]
     const data = this.heap.pop()
 
-    if (this.heap.length === 1) return root
+    if (this.heap.length === 0) return root
 
-    this.heap[1] = Number(data)
+    this.heap[0] = Number(data)
     this.currentSize -= 1
+    this.heapifyDown(0)
 
     return root
   }
